@@ -104,7 +104,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Eliminar socio</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button id="borra-close-x" type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -142,6 +142,9 @@
         });
 
         document.querySelector('#borra-close').addEventListener('click', function(e) {
+            borraModal.hide();
+        });
+        document.querySelector('#borra-close-x').addEventListener('click', function(e) {
             borraModal.hide();
         });
     });
