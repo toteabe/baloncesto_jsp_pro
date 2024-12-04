@@ -147,6 +147,13 @@
         document.querySelector('#borra-close-x').addEventListener('click', function(e) {
             borraModal.hide();
         });
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
     });
 </script>
 <%--BS 3--%>
