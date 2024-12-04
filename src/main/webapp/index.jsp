@@ -7,14 +7,18 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%-- BS 5--%>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+<%--    BS 3 + jQuery--%>
+<%--    <!-- Latest compiled and minified CSS -->--%>
+<%--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">--%>
+<%--    <!-- Optional theme -->--%>
+<%--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">--%>
+<%--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>--%>
+<%--    <!-- Latest compiled and minified JavaScript -->--%>
+<%--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>--%>
 
     <title>C. Baloncesto</title>
 </head>
@@ -78,6 +82,23 @@
         </table>
     </div>
 </div>
+<div class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div id="borra-modal" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -97,19 +118,13 @@
         </div>
     </div>
 </div>
+<%-- BS 5--%>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
 
-        document.querySelector('#borra-save').addEventListener('click', function(e) {
-            e.target.form_socio_id.submit();
-            $('#borra-modal').modal('hide');
-        });
+        const borraModal = new bootstrap.Modal('#borra-modal');
 
-        document.querySelector('#borra-close').addEventListener('click', function(e) {
-            $('#borra-modal').modal('hide');
-        });
-
-        let borraEls = document.querySelectorAll('.borra-socio-btn');
+        const borraEls = document.querySelectorAll('.borra-socio-btn');
         Array.from(borraEls).forEach((el) => {
             el.addEventListener('click', function (e) {
                 //por si se te olvida añadir el.. type="button"
@@ -117,12 +132,46 @@
                 document.querySelector('#num-socio').innerText= e.target.getAttribute('data-socio-id');
                 document.querySelector('#borra-save').form_socio_id = e.target.parentElement;
 
-                $('#borra-modal').modal('show');
+                borraModal.show();
             });
+        });
+
+        document.querySelector('#borra-save').addEventListener('click', function(e) {
+            e.target.form_socio_id.submit();
+            borraModal.hide();
+        });
+
+        document.querySelector('#borra-close').addEventListener('click', function(e) {
+            borraModal.hide();
         });
     });
 </script>
+<%--BS 3--%>
+<%--<script>--%>
+<%--    document.addEventListener('DOMContentLoaded', function () {--%>
 
+<%--        document.querySelector('#borra-save').addEventListener('click', function(e) {--%>
+<%--            e.target.form_socio_id.submit();--%>
+<%--            $('#borra-modal').modal('hide');--%>
+<%--        });--%>
+
+<%--        document.querySelector('#borra-close').addEventListener('click', function(e) {--%>
+<%--            $('#borra-modal').modal('hide');--%>
+<%--        });--%>
+
+<%--        let borraEls = document.querySelectorAll('.borra-socio-btn');--%>
+<%--        Array.from(borraEls).forEach((el) => {--%>
+<%--            el.addEventListener('click', function (e) {--%>
+<%--                //por si se te olvida añadir el.. type="button"--%>
+<%--                e.preventDefault();--%>
+<%--                document.querySelector('#num-socio').innerText= e.target.getAttribute('data-socio-id');--%>
+<%--                document.querySelector('#borra-save').form_socio_id = e.target.parentElement;--%>
+
+<%--                $('#borra-modal').modal('show');--%>
+<%--            });--%>
+<%--        });--%>
+<%--    });--%>
+<%--</script>--%>
 <%--<script>--%>
 <%--    $(function() {--%>
 
